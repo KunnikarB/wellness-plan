@@ -5,3 +5,9 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
+module.exports = {
+  images: {
+    remotePatterns: [new URL('https://randomuser.me/api/portraits/lego/1.jpg')],
+  },
+};

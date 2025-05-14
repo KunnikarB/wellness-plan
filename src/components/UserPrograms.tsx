@@ -14,6 +14,7 @@ import {
   AppleIcon,
   ShieldIcon,
 } from 'lucide-react';
+import Image from 'next/image';
 import { USER_PROGRAMS } from '@/constants/index';
 
 const UserPrograms = () => {
@@ -93,11 +94,12 @@ const UserPrograms = () => {
 
               <CardHeader className="pt-6 px-5">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="h-16 w-16 rounded-full overflow-hidden border border-border">
-                    <img
+                  <div className="h-16 w-16 rounded-full overflow-hidden border border-border  ">
+                    <Image
                       src={program.profilePic}
                       alt={`${program.first_name}`}
-                      className="h-full w-full object-cover"
+                      width={100}
+                      height={100}
                     />
                   </div>
                   <div>
@@ -220,15 +222,15 @@ const UserPrograms = () => {
             </Button>
           </Link>
 
-          <div class="flex justify-center items-center">
-            <img
-              src="workout-girl.jpg"
+          <div className="flex justify-center items-center mt-6">
+            <Image
+              src="/workout-girl.jpg"
               alt="Woman workout"
-              class="max-w-80 mb-4 mt-8 rounded-lg shadow-lg"
-              style={{ width: '300px', height: 'auto' }}
+              width={200}
+              height={200}
             />
           </div>
-          
+
           <p className="text-muted-foreground mt-4">
             Join 500+ users with AI-customized fitness programs
           </p>

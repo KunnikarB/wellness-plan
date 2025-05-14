@@ -106,7 +106,7 @@ export const USER_PROGRAMS = [
     id: 3,
     first_name: 'Gabriella',
     last_name: 'Bourgeois',
-    profilePic: '/Kae.jpg',
+    profilePic: '/Gabriella.jpeg',
     fitness_goal: 'General Fitness',
     height: '5\'4"',
     weight: '130 lbs',
