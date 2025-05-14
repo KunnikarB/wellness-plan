@@ -3,12 +3,10 @@ import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
 import {
-  ChevronRight,
   Dumbbell,
   Sparkles,
   Users,
@@ -105,7 +103,7 @@ const UserPrograms = () => {
                   <div>
                     <CardTitle className="text-xl text-foreground">
                       {program.first_name}
-                      <span className="text-primary">.exe</span>
+                      <span className="text-primary"> {program.last_name}</span>
                     </CardTitle>
                     <div className="text-sm text-muted-foreground flex items-center gap-2 mt-1">
                       <Users className="h-4 w-4" />
@@ -140,7 +138,13 @@ const UserPrograms = () => {
                         </h3>
                       </div>
                       <p className="text-sm text-muted-foreground mt-1">
-                        {program.equipment_access}
+                        {program.workout_plan.weekly_schedule.map((day) => (
+                          <span key={day.day}>
+                            {day.day}: {day.focus} ({day.duration})
+                            {program.workout_plan.weekly_schedule.length - 1 !==
+                              Number(day.day) && ', '}
+                          </span>
+                        ))}
                       </p>
                     </div>
                   </div>
@@ -156,7 +160,22 @@ const UserPrograms = () => {
                         </h3>
                       </div>
                       <p className="text-sm text-muted-foreground mt-1">
-                        System optimized nutrition
+                        Daily Calories: {program.diet_plan.daily_calories}
+                      </p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Macros: {program.diet_plan.macros.protein} protein,{' '}
+                        {program.diet_plan.macros.carbs} carbs,{' '}
+                        {program.diet_plan.macros.fats} fats
+                      </p>
+                      <p className="text-sm text-muted-foreground mt-1">
+                        Meal Examples:
+                        {program.diet_plan.meal_examples.map((meal) => (
+                          <span key={meal.meal}>
+                            {meal.meal}: {meal.example}
+                            {program.diet_plan.meal_examples.length - 1 !==
+                              Number(meal.meal) && ', '}
+                          </span>
+                        ))}
                       </p>
                     </div>
                   </div>
@@ -177,24 +196,14 @@ const UserPrograms = () => {
                     </div>
                   </div>
                 </div>
-
                 {/* Program description */}
                 <div className="mt-5 pt-5 border-t border-border">
                   <div className="text-sm text-muted-foreground">
                     <span className="text-primary">&gt; </span>
-                    {program.workout_plan.description.substring(0, 120)}...
+                    {program.workout_plan.description}
                   </div>
                 </div>
               </CardContent>
-
-              <CardFooter className="px-5 py-4 border-t border-border">
-                <Link href={`/programs/${program.id}`} className="w-full">
-                  <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-                    View Program Details
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </CardFooter>
             </Card>
           ))}
         </div>
@@ -210,6 +219,16 @@ const UserPrograms = () => {
               <Sparkles className="ml-2 h-5 w-5" />
             </Button>
           </Link>
+
+          <div class="flex justify-center items-center">
+            <img
+              src="workout-girl.jpg"
+              alt="Woman workout"
+              class="max-w-80 mb-4 mt-8 rounded-lg shadow-lg"
+              style={{ width: '300px', height: 'auto' }}
+            />
+          </div>
+          
           <p className="text-muted-foreground mt-4">
             Join 500+ users with AI-customized fitness programs
           </p>
