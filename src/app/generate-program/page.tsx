@@ -138,7 +138,10 @@ const GenerateProgramPage = () => {
             full_name: fullName,
             user_id: user?.id,
           },
+          clientMessages: [],
+          serverMessages: [],
         });
+
       } catch (error) {
         console.log('Failed to start call', error);
         setConnecting(false);
