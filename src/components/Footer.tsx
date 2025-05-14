@@ -24,6 +24,17 @@ const Footer = () => {
             </p>
           </div>
 
+          <div className="text-sm">
+            <Link
+              href="https://kunnikarb.github.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              Code By | Kunnikar Boonbunlu
+            </Link>
+          </div>
+
           {/* Status */}
           <div className="flex items-center gap-2 px-3 py-2 border border-border rounded-md bg-background/50">
             <div className="w-2 h-2 rounded-full bg-green-500"></div>
