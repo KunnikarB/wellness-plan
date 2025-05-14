@@ -15,8 +15,8 @@ const TerminalOverlay = () => {
           <span className="text-primary">/</span> WORKOUT ANALYSIS COMPLETE
         </p>
 
-        <div className="space-y-1.5 text-xs text-muted-foreground">
-          <div className="flex items-center">
+        <div className="space-y-1.5 text-xs text-muted-foreground p-4">
+          <div className="flex flex-wrap items-center">
             <div className="text-primary mr-2">01</div>
             <span>30 min strength training (upper body)</span>
           </div>

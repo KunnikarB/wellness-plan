@@ -1,12 +1,36 @@
 'use client';
 
 import { SignInButton, SignUpButton, UserButton, useUser } from '@clerk/nextjs';
-import { DumbbellIcon, HomeIcon, UserIcon, ZapIcon } from 'lucide-react';
+import {
+  DumbbellIcon,
+  HomeIcon,
+  UserIcon,
+  ZapIcon,
+  MenuIcon,
+  XIcon,
+} from 'lucide-react';
 import Link from 'next/link';
 import { Button } from './ui/button';
+import { useState, useEffect } from 'react';
 
 const Navbar = () => {
   const { isSignedIn } = useUser();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 768); // Consider 768px as the medium breakpoint
+    };
+
+    handleResize(); // Check on initial load
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/60 backdrop-blur-md border-b border-border py-3">
@@ -21,13 +45,35 @@ const Navbar = () => {
           </span>
         </Link>
 
+        {/* Mobile Menu Button */}
+        {!isDesktop && (
+          <button
+            className="text-gray-500 hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+            onClick={toggleMobileMenu}
+            aria-label="Toggle mobile menu"
+          >
+            {isMobileMenuOpen ? (
+              <XIcon className="h-6 w-6" />
+            ) : (
+              <MenuIcon className="h-6 w-6" />
+            )}
+          </button>
+        )}
+
         {/* NAVIGATION */}
-        <nav className="flex items-center gap-5">
+        <nav
+          className={`${
+            isDesktop
+              ? 'flex items-center gap-5'
+              : 'absolute top-full left-0 right-0 bg-background/90 backdrop-blur-md py-4 space-y-3 text-center'
+          } ${isMobileMenuOpen ? 'flex flex-col' : isDesktop ? 'flex' : 'hidden'}`} // Adjusted for desktop
+        >
           {isSignedIn ? (
             <>
               <Link
                 href="/"
                 className="flex items-center gap-1.5 text-sm hover:text-primary transition-colors"
+                onClick={() => !isDesktop && setIsMobileMenuOpen(false)}
               >
                 <HomeIcon size={16} />
                 <span>Home</span>
@@ -36,6 +82,7 @@ const Navbar = () => {
               <Link
                 href="/generate-program"
                 className="flex items-center gap-1.5 text-sm hover:text-primary transition-colors"
+                onClick={() => !isDesktop && setIsMobileMenuOpen(false)}
               >
                 <DumbbellIcon size={16} />
                 <span>Generate</span>
@@ -44,6 +91,7 @@ const Navbar = () => {
               <Link
                 href="/profile"
                 className="flex items-center gap-1.5 text-sm hover:text-primary transition-colors"
+                onClick={() => !isDesktop && setIsMobileMenuOpen(false)}
               >
                 <UserIcon size={16} />
                 <span>Profile</span>
@@ -53,9 +101,16 @@ const Navbar = () => {
                 variant="outline"
                 className="ml-2 border-primary/50 text-primary hover:text-white hover:bg-primary/10"
               >
-                <Link href="/generate-program">Get Started</Link>
+                <Link
+                  href="/generate-program"
+                  onClick={() => !isDesktop && setIsMobileMenuOpen(false)}
+                >
+                  Get Started
+                </Link>
               </Button>
-              <UserButton />
+              <div className="md:ml-2">
+                <UserButton afterSignOutUrl="/" />
+              </div>
             </>
           ) : (
             <>
@@ -80,4 +135,5 @@ const Navbar = () => {
     </header>
   );
 };
+
 export default Navbar;
