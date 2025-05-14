@@ -15,7 +15,7 @@ const HomePage = () => {
 
             {/* LEFT SIDE CONTENT */}
             <div className="lg:col-span-7 space-y-8 relative">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+              <h1 className="text-5xl md:text-5xl lg:text-7xl font-bold tracking-tight">
                 <div>
                   <span className="text-foreground">Transform</span>
                 </div>
