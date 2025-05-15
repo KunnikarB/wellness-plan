@@ -13,7 +13,7 @@
 
 
 
-## https://fitadvisor.netlify.app/
+## https://wellness-plan-mocha.vercel.app/
 
 <br>
 <br>
